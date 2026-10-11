@@ -1,1 +1,335 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Spinners</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+:root{
+  --bg:#f5f6f8;
+  --card:rgba(255,255,255,.9);
+  --text:#17181b;
+  --muted:#73767d;
+  --border:rgba(0,0,0,.08);
+  --shadow:0 12px 35px rgba(0,0,0,.08);
+  --accent:#6e6f75;
+  --danger:#b84f5c;
+  --radius:22px;
+}
+
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
+
+html,body{
+  margin:0;
+  padding:0;
+  min-height:100%;
+}
+
+body{
+  font-family:Prompt,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+}
+
+button,
+input,
+select,
+textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.header{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:rgba(255,255,255,.82);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+
+.headerInner{
+  width:min(1200px,100%);
+  min-height:72px;
+  margin:auto;
+  padding:10px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:800;
+  font-size:21px;
+  white-space:nowrap;
+}
+
+.brandLogo{
+  width:42px;
+  height:42px;
+  display:grid;
+  place-items:center;
+  border-radius:14px;
+  background:#fff;
+  box-shadow:var(--shadow);
+  font-size:25px;
+}
+
+.nav{
+  display:flex;
+  gap:6px;
+  overflow-x:auto;
+}
+
+.nav button{
+  border:0;
+  background:transparent;
+  padding:10px 13px;
+  border-radius:12px;
+  color:var(--muted);
+  font-weight:600;
+}
+
+.nav button.active,
+.nav button:hover{
+  background:#eceef1;
+  color:var(--text);
+}
+
+.page{
+  width:min(100%,1150px);
+  margin:auto;
+  padding:28px 18px 70px;
+}
+
+.hidden{
+  display:none!important;
+}
+
+.hero{
+  text-align:center;
+  padding:28px 10px 34px;
+}
+
+.heroLogo{
+  width:110px;
+  height:110px;
+  margin:0 auto 18px;
+  display:grid;
+  place-items:center;
+  border-radius:32px;
+  background:#fff;
+  box-shadow:var(--shadow);
+  font-size:64px;
+}
+
+.hero h1{
+  margin:0;
+  font-size:58px;
+  line-height:1;
+  letter-spacing:-2px;
+}
+
+.hero p{
+  margin:12px 0 0;
+  color:var(--muted);
+  font-size:18px;
+}
+
+.homeButtons{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:26px;
+}
+
+.primaryBtn,
+.secondaryBtn,
+.dangerBtn,
+.discordBtn,
+.logoutBtn{
+  border:0;
+  border-radius:15px;
+  padding:13px 18px;
+  font-weight:700;
+  transition:.18s;
+}
+
+.primaryBtn{
+  background:#1d1f23;
+  color:#fff;
+}
+
+.secondaryBtn{
+  background:#fff;
+  color:var(--text);
+  border:1px solid var(--border);
+}
+
+.dangerBtn{
+  background:#fff0f2;
+  color:var(--danger);
+}
+
+.primaryBtn:hover,
+.secondaryBtn:hover,
+.dangerBtn:hover,
+.discordBtn:hover,
+.logoutBtn:hover{
+  transform:translateY(-1px);
+}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:20px;
+  margin-bottom:18px;
+}
+
+.sectionTitle{
+  margin:0 0 14px;
+  font-size:20px;
+}
+
+.accountCard{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:14px;
+}
+
+.accountAvatar{
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  background:#eef0f2;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  font-size:25px;
+  flex-shrink:0;
+}
+
+.accountInfo{
+  min-width:0;
+}
+
+.accountName{
+  color:var(--muted);
+  font-size:13px;
+}
+
+.ownerBadge{
+  display:inline-block;
+  margin-left:5px;
+  padding:3px 7px;
+  border-radius:8px;
+  background:#fff0bd;
+  color:#806300;
+  font-size:12px;
+}
+
+.discordBtn{
+  background:#5865f2;
+  color:#fff;
+}
+
+.logoutBtn{
+  background:#fff0f2;
+  color:var(--danger);
+}
+
+.wheelCard{
+  text-align:center;
+}
+
+.wheelArea{
+  width:min(90vw,650px);
+  margin:8px auto 24px;
+  position:relative;
+  aspect-ratio:1;
+}
+
+#wheel{
+  width:100%;
+  height:100%;
+  display:block;
+  border-radius:50%;
+}
+
+.pointer{
+  position:absolute;
+  z-index:5;
+  left:50%;
+  top:-3px;
+  transform:translateX(-50%);
+  font-size:42px;
+  filter:drop-shadow(0 3px 3px rgba(0,0,0,.15));
+}
+
+.spinButton{
+  min-width:180px;
+  font-size:18px;
+  padding:15px 25px;
+}
+
+.controls{
+  display:flex;
+  justify-content:center;
+  align-items:end;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:20px;
+}
+
+.controlGroup{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:6px;
+}
+
+.controlGroup label{
+  color:var(--muted);
+  font-size:13px;
+}
+
+.controlGroup select,
+.controlGroup input{
+  min-width:170px;
+  padding:11px 13px;
+  border-radius:13px;
+  border:1px solid var(--border);
+  background:#fff;
+  outline:none;
+}
+
+.settingsGrid{
+  display:grid;
+  gap:18px;
+}
+
+.itemRow{
+  dis
